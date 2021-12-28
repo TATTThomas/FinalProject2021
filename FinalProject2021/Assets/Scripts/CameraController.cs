@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
     public float sensitivity;
     public Vector3 movingDir;
     public Quaternion faceDir;
+    Vector3 five = new Vector3(0, 0, -5);
+    public Vector3 distance;
 
     // Start is called before the first frame update
     void Start()
@@ -18,10 +20,12 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        faceDir = transform.rotation;
+        //movingDir = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+        distance = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * five;
         movingDir = -(transform.position - player.transform.position);
         movingDir = new Vector3(movingDir.x, 0, movingDir.z);
         movingDir = movingDir.normalized;
-        faceDir = transform.rotation;
     }
 
 

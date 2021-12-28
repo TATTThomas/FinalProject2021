@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a854058965e0b748bfec9af9ccfe648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   jumpForce: 300
   cameraCont: {fileID: 963194229}
   movingDir: {x: 0, y: 0, z: 0}
@@ -734,10 +734,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.24822591
-  m_Height: 1.92
+  m_Radius: 0.36662984
+  m_Height: 1.9199998
   m_Direction: 1
-  m_Center: {x: 0, y: 0.94138086, z: -0.030329809}
+  m_Center: {x: 0.012290001, y: 0.94138086, z: -0.040232837}
 --- !u!54 &483996780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1744,6 +1744,7 @@ MonoBehaviour:
   sensitivity: -2
   movingDir: {x: 0, y: 0, z: 0}
   faceDir: {x: 0, y: 0, z: 0, w: 0}
+  distance: {x: 0, y: 0, z: 0}
 --- !u!4 &979919911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6cfb80454aee73840b7e1a3bb551ea1b, type: 3}
@@ -2016,6 +2017,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 144fafb731a4b4944b48596f3688afb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 144fafb731a4b4944b48596f3688afb4, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 144fafb731a4b4944b48596f3688afb4, type: 3}
