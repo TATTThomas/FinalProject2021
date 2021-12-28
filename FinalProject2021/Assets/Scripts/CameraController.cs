@@ -21,11 +21,11 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         faceDir = transform.rotation;
-        //movingDir = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+        movingDir = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
         distance = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * five;
-        movingDir = -(transform.position - player.transform.position);
-        movingDir = new Vector3(movingDir.x, 0, movingDir.z);
-        movingDir = movingDir.normalized;
+        //movingDir = -(transform.position - player.transform.position);
+        //movingDir = new Vector3(movingDir.x, 0, movingDir.z);
+        //movingDir = movingDir.normalized;
     }
 
 

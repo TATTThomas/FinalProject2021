@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458334189a9ffd94abc2e49f742502a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rebirthPoint: {x: 0, y: 1, z: 0}
+  rebirthPoint: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &504833622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2678,7 +2678,7 @@ Transform:
   - {fileID: 634108768}
   - {fileID: 1787328213}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1558408409 stripped
 Transform:

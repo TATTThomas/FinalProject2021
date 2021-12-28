@@ -14,11 +14,11 @@ public class death_Judge : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.transform.name);
+        //Debug.Log(collision.transform.name);
     }
     private void OnCollisionStay(Collision collision)
     {
-        Debug.Log(collision.transform.name);
+        //Debug.Log(collision.transform.name);
         if (collision.transform.name == "ceilingTrap")
         {
             transform.position = rebirthPoint;

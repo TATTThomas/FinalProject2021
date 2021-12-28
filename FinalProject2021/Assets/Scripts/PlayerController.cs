@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         cm.transform.position = new Vector3(cm.transform.position.x, transform.position.y + 2, cm.transform.position.z);
         movingDir = cameraCont.movingDir;
         faceDir = cameraCont.faceDir;
@@ -94,16 +95,21 @@ public class PlayerController : MonoBehaviour
             //rb.MovePosition(transform.position + Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed);
             //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
-        
+        Debug.Log(moving);
         if(Physics.Raycast(transform.position, moving.normalized, 0.5f))
         {
             Debug.Log("a");
-            moving = Vector3.zero;
+            moving -= moving * 0.9f;
         }
 
         //rb.MovePosition(transform.position + moving);
         transform.position += moving;
-        cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
+
+        if(Physics.Raycast(transform.position + new Vector3(0, 1.92f, 0), -(transform.position - cm.transform.position + new Vector3(0, 1.92f, 0) + movingDir), 3))
+        {
+            Debug.Log("b");
+            cm.transform.position = transform.position + new Vector3(0, 1.92f, 0);
+        }
 
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
