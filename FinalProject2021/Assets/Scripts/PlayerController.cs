@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject cm;
     Rigidbody rb;
     Vector3 five = new Vector3(0, 0, -3);
+    Vector3 moving;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,12 @@ public class PlayerController : MonoBehaviour
         movingDir = cameraCont.movingDir;
         faceDir = cameraCont.faceDir;
 
+        moving = Vector3.zero;
+
+
+        
+
+
         idel = true;
         runforword = runback = runleft = runright = false;
         if (Input.GetKey(KeyCode.D))
@@ -43,9 +50,10 @@ public class PlayerController : MonoBehaviour
             runleft = false;
             idel = false;
             runfr = runfl = runbl = runbr = false;
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); 
-            transform.position += Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed;
-            cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            moving += Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed;
+            //rb.MovePosition(transform.position + Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed);
+            //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -56,8 +64,9 @@ public class PlayerController : MonoBehaviour
             runright = false;
             runfr = runfl = runbl = runbr = false;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-            transform.position += Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed;
-            cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
+            moving += Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed;
+            //rb.MovePosition(transform.position + Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed);
+            //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
         if (Input.GetKey(KeyCode.W))
         {
@@ -68,8 +77,9 @@ public class PlayerController : MonoBehaviour
             runforword = true;
             runfr = runfl = runbl = runbr = false;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-            transform.position += movingDir * Time.deltaTime * moveSpeed;
-            cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
+            moving += movingDir * Time.deltaTime * moveSpeed;
+            //rb.MovePosition(transform.position + movingDir * Time.deltaTime * moveSpeed);
+            //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -80,9 +90,21 @@ public class PlayerController : MonoBehaviour
             runback = true;
             runfr = runfl = runbl = runbr = false;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-            transform.position += Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed;
-            cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
+            moving += Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed;
+            //rb.MovePosition(transform.position + Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed);
+            //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
+        
+        if(Physics.Raycast(transform.position, moving.normalized, 0.5f))
+        {
+            Debug.Log("a");
+            moving = Vector3.zero;
+        }
+
+        //rb.MovePosition(transform.position + moving);
+        transform.position += moving;
+        cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
+
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
             runfr = true;
@@ -191,8 +213,12 @@ public class PlayerController : MonoBehaviour
 
     bool IsGround()
     {
-        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.06861908f);
+        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.17062914f);
         return isGround;
+    }
+    private void FixedUpdate()
+    {
+        rb.MovePosition(transform.position + (moving)*2);
     }
 
 }
