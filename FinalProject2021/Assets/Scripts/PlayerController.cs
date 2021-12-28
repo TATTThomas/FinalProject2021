@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cm.transform.position = new Vector3(cm.transform.position.x, transform.position.y + 1, cm.transform.position.z);
+        cm.transform.position = new Vector3(cm.transform.position.x, transform.position.y + 2, cm.transform.position.z);
         movingDir = cameraCont.movingDir;
         faceDir = cameraCont.faceDir;
 
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
             runleft = false;
             idel = false;
             runfr = runfl = runbl = runbr = false;
-            transform.rotation = cm.transform.rotation;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z); 
             transform.position += Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed;
             cm.transform.position += Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed;
         }
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
             runback = false;
             runright = false;
             runfr = runfl = runbl = runbr = false;
-            transform.rotation = cm.transform.rotation;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             transform.position += Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed;
             cm.transform.position += Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed;
         }
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
             runleft = false;
             runforword = true;
             runfr = runfl = runbl = runbr = false;
-            transform.rotation = cm.transform.rotation;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             transform.position += movingDir * Time.deltaTime * moveSpeed;
             cm.transform.position += movingDir * Time.deltaTime * moveSpeed;
         }
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
             runleft = false;
             runback = true;
             runfr = runfl = runbl = runbr = false;
-            transform.rotation = cm.transform.rotation;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             transform.position += Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed;
             cm.transform.position += Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed;
         }
@@ -190,8 +190,7 @@ public class PlayerController : MonoBehaviour
 
     bool IsGround()
     {
-        float height = GetComponent<Collider>().bounds.size.y;
-        bool isGround = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f);
+        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.06861908f);
         return isGround;
     }
 
