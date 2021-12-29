@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
-        cm.transform.position = new Vector3(cm.transform.position.x, transform.position.y + 2, cm.transform.position.z);
+        cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up*2;
+        //cm.transform.position = new Vector3(cm.transform.position.x, transform.position.y + 2, cm.transform.position.z);
         movingDir = cameraCont.movingDir;
         faceDir = cameraCont.faceDir;
 
@@ -39,8 +39,6 @@ public class PlayerController : MonoBehaviour
 
 
         
-
-
         idel = true;
         runforword = runback = runleft = runright = false;
         if (Input.GetKey(KeyCode.D))
@@ -95,8 +93,7 @@ public class PlayerController : MonoBehaviour
             //rb.MovePosition(transform.position + Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed);
             //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
-        Debug.Log(moving);
-        if(Physics.Raycast(transform.position, moving.normalized, 0.5f))
+        if(Physics.Raycast(transform.position + new Vector3(0, 0.6f, 0), moving.normalized, 0.5f))
         {
             Debug.Log("a");
             moving -= moving * 0.9f;
@@ -105,7 +102,7 @@ public class PlayerController : MonoBehaviour
         //rb.MovePosition(transform.position + moving);
         transform.position += moving;
 
-        if(Physics.Raycast(transform.position + new Vector3(0, 1.92f, 0), -(transform.position - cm.transform.position + new Vector3(0, 1.92f, 0) + movingDir), 3))
+        if(Physics.Raycast(transform.position + new Vector3(0, 1.92f, 0), cm.transform.position - (transform.position + new Vector3(0, 1.92f, 0)) + movingDir, 3))
         {
             Debug.Log("b");
             cm.transform.position = transform.position + new Vector3(0, 1.92f, 0);
@@ -219,12 +216,12 @@ public class PlayerController : MonoBehaviour
 
     bool IsGround()
     {
-        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.17062914f);
+        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.26861890f);
         return isGround;
     }
     private void FixedUpdate()
     {
-        rb.MovePosition(transform.position + (moving)*2);
+        rb.MovePosition(transform.position + (moving) * 2);
     }
 
 }
