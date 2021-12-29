@@ -4,34 +4,27 @@ using UnityEngine;
 
 public class CamLookAtButton : MonoBehaviour
 {
-    public ButtonController button;
     public float maxDistance;
+    public RotateRoad rr;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        RaycastHit hit;
-
-        // if raycast hits, it checks if it hit an object with the tag Button
-        if (Physics.Raycast(transform.position, transform.forward + new Vector3(0, 0, -0.3f), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player") || Physics.Raycast(transform.position, transform.forward + new Vector3(0.3f, 0, -0.3f), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player") || Physics.Raycast(transform.position, transform.forward + new Vector3(0.3f, 0, -0.3f), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player"))
+        if(player.transform.position.x - transform.position.x < 1 && player.transform.position.x - transform.position.x > -1 && player.transform.position.z - transform.position.z > -1 && player.transform.position.z - transform.position.z < 1 && player.transform.position.y - transform.position.y > -1 && player.transform.position.y - transform.position.y < 1)
         {
-            Debug.Log("color");
-            button.ChangeColor(Color.red);
-        }
-        else
-        {
-            button.ChangeColor(Color.white);
+            Debug.Log("r");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                rr.Rotate_road();
+            }
         }
     }
+    
 }

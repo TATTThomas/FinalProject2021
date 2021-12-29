@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
             //rb.MovePosition(transform.position + Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed);
             //cm.transform.position = transform.position + Quaternion.Euler(0, cm.transform.rotation.eulerAngles.y, 0) * five + Vector3.up * 2;
         }
+        
         if(Physics.Raycast(transform.position + new Vector3(0, 0.6f, 0), moving.normalized, 0.5f))
         {
             Debug.Log("a");
