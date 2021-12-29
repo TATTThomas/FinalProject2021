@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class death_Judge : MonoBehaviour
 {
-    bool wall, floor, wallTrap, ceilingTrap;
+    bool wall, wallTrap;
+    int trapNum;
     public Vector3 rebirthPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        trapNum = 0;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.transform.name);
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        //Debug.Log(collision.transform.name);
         if (collision.transform.name == "ceilingTrap")
         {
             transform.position = rebirthPoint;
@@ -26,12 +22,13 @@ public class death_Judge : MonoBehaviour
         if (collision.transform.name == "wallTrap")
         {
             wallTrap = true;
+            trapNum++;
         }
-        if (collision.transform.name == "wall")
+        if (collision.transform.name == "specificWall")
         {
             wall = true;
         }
-        if (wall && wallTrap)
+        if ((wall && wallTrap) || trapNum >= 2)
         {
             transform.position = rebirthPoint;
         }
@@ -41,8 +38,9 @@ public class death_Judge : MonoBehaviour
         if (collision.transform.name == "wallTrap")
         {
             wallTrap = false;
+            trapNum--;
         }
-        if (collision.transform.name == "wall")
+        if (collision.transform.name == "specificWall")
         {
             wall = false;
         }
@@ -51,6 +49,5 @@ public class death_Judge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class trap_abruptMove : MonoBehaviour
 {
     //define two different time
-    public float downTime, upTime;
+    public float downSpeed, upSpeed;
     public float moveDistance;
     Vector3 originalPos;
     Vector3 newPos;
@@ -33,8 +33,8 @@ public class trap_abruptMove : MonoBehaviour
             isNew = true;
         }
         if (isOrigin)
-            transform.position = Vector3.MoveTowards(transform.position, newPos, downTime * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, newPos, downSpeed * Time.deltaTime);
         if (isNew)
-            transform.position = Vector3.MoveTowards(transform.position, originalPos, upTime * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, originalPos, upSpeed * Time.deltaTime);
     }
 }
