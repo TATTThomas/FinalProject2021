@@ -183,14 +183,20 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        RaycastHit hit;
 
-        if (!IsGround())
+        Debug.DrawRay(transform.position, Vector3.down, Color.red, 0.01f, true);
+        if (IsGround())
         {
-            jump = true;
+            jump = false;
+        }
+        else if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.26861890f) && hit.collider.gameObject.CompareTag("Stairs"))
+        {
+            jump = false;
         }
         else
         {
-            jump = false;
+            jump = true;
         }
 
 
@@ -216,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
     bool IsGround()
     {
-        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.26861890f);
+        bool isGround = Physics.Raycast(transform.position, Vector3.down, 0.16861890f);
         return isGround;
     }
     private void FixedUpdate()
