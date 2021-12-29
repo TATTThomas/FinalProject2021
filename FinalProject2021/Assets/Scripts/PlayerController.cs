@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed, jumpForce;
-    bool runforword, runback, runright, runleft, idel, runfr, runfl, runbr, runbl, jump;
+    bool runforward, runback, runright, runleft, idle, runfr, runfl, runbr, runbl, jump;
     Animator animator;
     public CameraController cameraCont;
     public Vector3 movingDir;
@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.lockState = CursorLockMode.Locked;
-        runforword = runback = runleft = runright = false;
-        idel = true;
+        runforward = runback = runleft = runright = false;
+        idle = true;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
@@ -37,18 +37,12 @@ public class PlayerController : MonoBehaviour
 
         moving = Vector3.zero;
 
-
-        
-        idel = true;
-        runforword = runback = runleft = runright = false;
+        resetAnimation();
+        idle = true;
         if (Input.GetKey(KeyCode.D))
         {
+            resetAnimation();
             runright = true;
-            runforword = false;
-            runback = false;
-            runleft = false;
-            idel = false;
-            runfr = runfl = runbl = runbr = false;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             moving += Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed;
             //rb.MovePosition(transform.position + Quaternion.Euler(0, 90, 0) * movingDir * Time.deltaTime * moveSpeed);
@@ -56,12 +50,8 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            idel = false;
+            resetAnimation();
             runleft = true;
-            runforword = false;
-            runback = false;
-            runright = false;
-            runfr = runfl = runbl = runbr = false;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             moving += Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed;
             //rb.MovePosition(transform.position + Quaternion.Euler(0, -90, 0) * movingDir * Time.deltaTime * moveSpeed);
@@ -69,12 +59,8 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
-            idel = false;
-            runright = false;
-            runback = false;
-            runleft = false;
-            runforword = true;
-            runfr = runfl = runbl = runbr = false;
+            resetAnimation();
+            runforward = true;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             moving += movingDir * Time.deltaTime * moveSpeed;
             //rb.MovePosition(transform.position + movingDir * Time.deltaTime * moveSpeed);
@@ -82,12 +68,8 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S))
         {
-            idel = false;
-            runforword = false;
-            runright = false;
-            runleft = false;
+            resetAnimation();
             runback = true;
-            runfr = runfl = runbl = runbr = false;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, cm.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
             moving += Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed;
             //rb.MovePosition(transform.position + Quaternion.Euler(0, 180, 0) * movingDir * Time.deltaTime * moveSpeed);
@@ -110,77 +92,53 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
+            resetAnimation();
             runfr = true;
-            idel = false;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfl = runbl = runbr = false;
         }
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
         {
+            resetAnimation();
             runfl = true;
-            idel = false;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfr = runbl = runbr = false;
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
+            resetAnimation();
             runbr = true;
-            idel = false;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfl = runbl = runfr = false;
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
         {
+            resetAnimation();
             runbl = true;
-            idel = false;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfl = runfr = runbr = false;
         }
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S))
         {
-            runfr = false;
-            idel = true;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfl = runbl = runbr = false;
+            resetAnimation();
+            if (Input.GetKey(KeyCode.A))
+                runleft = true;
+            else if (Input.GetKey(KeyCode.D))
+                runright = true;
+            else
+                idle = true;
         }
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
-            runfr = false;
-            idel = true;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfl = runbl = runbr = false;
+            resetAnimation();
+            if (Input.GetKey(KeyCode.W))
+                runforward = true;
+            else if (Input.GetKey(KeyCode.S))
+                runback = true;
+            else
+                idle = true;
         }
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
-            runfr = false;
-            idel = true;
-            runforword = false;
-            runright = false;
-            runleft = false;
-            runback = false;
-            runfl = runbl = runbr = false;
+            resetAnimation();
+            idle = true;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            if(IsGround())
+                Jump();
         }
 
         RaycastHit hit;
@@ -200,7 +158,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        animator.SetBool("RunForword", runforword);
+        animator.SetBool("RunForword", runforward);
         animator.SetBool("RunBack", runback);
         animator.SetBool("RunRight", runright);
         animator.SetBool("RunLeft", runleft);
@@ -208,16 +166,26 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("RunBL", runbl);
         animator.SetBool("RunFR", runfr);
         animator.SetBool("RunFL", runfl);
-        animator.SetBool("Idel", idel);
+        animator.SetBool("Idel", idle);
         animator.SetBool("Jump", jump);
+    }
+
+    void resetAnimation()
+    {
+        runfr = false;
+        idle = false;
+        runforward = false;
+        runright = false;
+        runleft = false;
+        runback = false;
+        runfl = false;
+        runbl = false;
+        runbr = false;
     }
 
     void Jump()
     {
-        if (IsGround())
-        {
-            rb.AddForce(Vector3.up * jumpForce);
-        }
+        rb.AddForce(Vector3.up * jumpForce);
     }
 
     bool IsGround()
