@@ -24,9 +24,9 @@ public class CamLookAtButton : MonoBehaviour
         RaycastHit hit;
 
         // if raycast hits, it checks if it hit an object with the tag Button
-        if (Physics.Raycast(transform.position, transform.forward + new Vector3(0, 0, -2), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player") || Physics.Raycast(transform.position, transform.forward + new Vector3(2, 0, -2), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player") || Physics.Raycast(transform.position, transform.forward + new Vector3(-2, 0, -2), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, transform.forward + new Vector3(0, 0, -0.3f), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player") || Physics.Raycast(transform.position, transform.forward + new Vector3(0.3f, 0, -0.3f), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player") || Physics.Raycast(transform.position, transform.forward + new Vector3(0.3f, 0, -0.3f), out hit, maxDistance) && hit.collider.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("a");
+            Debug.Log("color");
             button.ChangeColor(Color.red);
         }
         else

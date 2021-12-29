@@ -5,13 +5,14 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour
 {
     private Renderer renderer, rendererChild;
-    GameObject child;
+    GameObject child1, child2;
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
-        child = transform.GetChild(0).gameObject;
-        rendererChild = child.GetComponent<MeshRenderer>();
+        child2 = transform.GetChild(1).gameObject;
+        child1 = transform.GetChild(0).gameObject;
+        rendererChild = child1.GetComponent<MeshRenderer>();
+        renderer = child2.GetComponent<MeshRenderer>();
         //renderer.material.color = Color.red;
     }
 
