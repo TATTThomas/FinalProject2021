@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         //rb.MovePosition(transform.position + moving);
         transform.position += moving;
 
-        if(Physics.Raycast(transform.position + new Vector3(0, 1.92f, 0), cm.transform.position - (transform.position + new Vector3(0, 1.92f, 0)) + movingDir, 3))
+        if(Physics.Raycast(transform.position + new Vector3(0, 1.92f, 0), cm.transform.position - (transform.position + new Vector3(0, 1.92f, 0)), 3.5f))
         {
             Debug.Log("b");
             cm.transform.position = transform.position + new Vector3(0, 1.92f, 0);
