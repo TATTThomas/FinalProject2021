@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
+    public FloatFloorController floorController;
     private Renderer renderer, rendererChild;
     GameObject child1, child2;
     // Start is called before the first frame update
@@ -20,6 +21,13 @@ public class ButtonController : MonoBehaviour
     {
         renderer.material.color = color;
         rendererChild.material.color = color;
+        if(color == Color.red)
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                floorController.rotate();
+            }
+        }
     }
 
     // Update is called once per frame
