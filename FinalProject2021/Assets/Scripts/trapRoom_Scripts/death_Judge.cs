@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class death_Judge : MonoBehaviour
 {
-    bool wall, wallTrap;
+    bool wall, wallTrap, floor, ceilingTrap;
     int trapNum;
     public Vector3 rebirthPoint;
 
@@ -17,7 +17,7 @@ public class death_Judge : MonoBehaviour
     {
         if (collision.transform.name == "ceilingTrap")
         {
-            transform.position = rebirthPoint;
+            ceilingTrap = true;
         }
         if (collision.transform.name == "wallTrap")
         {
@@ -28,7 +28,7 @@ public class death_Judge : MonoBehaviour
         {
             wall = true;
         }
-        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser")
+        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser" || (ceilingTrap && floor))
         {
             transform.position = rebirthPoint;
         }
@@ -43,6 +43,14 @@ public class death_Judge : MonoBehaviour
         if (collision.transform.name == "specificWall")
         {
             wall = false;
+        }
+        if (collision.transform.name == "floor")
+        {
+            floor = false;
+        }
+        if (collision.transform.name == "ceilingTrap")
+        {
+            ceilingTrap = false;
         }
     }
 
