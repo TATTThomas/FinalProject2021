@@ -5,6 +5,7 @@ using UnityEngine;
 public class CamLookAtButton : MonoBehaviour
 {
     public RotateRoad rr;
+    public RotateRoad rr1;
     public GameObject player;
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class CamLookAtButton : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 rr.Rotate_road();
+                rr1.Rotate_road();
             }
         }
     }
