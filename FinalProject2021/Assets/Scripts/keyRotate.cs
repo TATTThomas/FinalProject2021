@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class rotate : MonoBehaviour
+public class keyRotate : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,6 @@ public class rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(0.5f, 1, 0.5f);
     }
 }
