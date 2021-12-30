@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Vector3 five = new Vector3(0, 0, -3);
     Vector3 moving;
+    public bool allKey;
 
     // Start is called before the first frame update
     void Start()

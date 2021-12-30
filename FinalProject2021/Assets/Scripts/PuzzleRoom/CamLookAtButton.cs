@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CamLookAtButton : MonoBehaviour
 {
-    public float maxDistance;
     public RotateRoad rr;
     public GameObject player;
 

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class droppingfloor : MonoBehaviour
 {
-    private bool isTrigger = false;
+    float r;
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name == "Player" && !isTrigger)
+        if (collision.transform.name == "Player")
         {
-            isTrigger = true;
-            StartCoroutine(rotate());
+            r = Random.value;
+            if (r > 0.75)
+            {
+                Debug.Log(r);
+                StartCoroutine(rotate());
+            }
         }
     }
     IEnumerator rotate()
@@ -20,17 +24,14 @@ public class droppingfloor : MonoBehaviour
             transform.parent.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime);
             yield return null;
         }
-        isTrigger = false;
     }
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
