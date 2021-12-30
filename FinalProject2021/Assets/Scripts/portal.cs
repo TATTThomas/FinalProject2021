@@ -34,9 +34,14 @@ public class portal : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (teleporting)
         {
-            if (pc.allKey && transform.name == "endPortal")
+            if (transform.name == "endPortal")
             {
-                SceneManager.LoadScene(1);
+                if (pc.allKeyInStage1)
+                    SceneManager.LoadScene(1);
+                else
+                    player.transform.position = teleportPosition;
+                if (pc.allKeyInStage2)
+                    SceneManager.LoadScene(2);
             }
             else
             {

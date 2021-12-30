@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Vector3 five = new Vector3(0, 0, -3);
     Vector3 moving;
-    public bool allKey;
+    public int keyInStage1, keyInStage2;
+    public bool allKeyInStage1, allKeyInStage2;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         runforward = runback = runleft = runright = false;
         idle = true;
+        keyInStage1 = 0;
+        keyInStage2 = 0;
+        allKeyInStage1 = false;
+        allKeyInStage2 = false;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
