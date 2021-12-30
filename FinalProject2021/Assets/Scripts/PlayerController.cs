@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Physics.Raycast(transform.position + new Vector3(0, 0.6f, 0), moving.normalized, 0.5f))
         {
-            Debug.Log("a");
+            //Debug.Log("a");
             moving -= moving * 0.9f;
         }
 
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
         if(Physics.Raycast(transform.position + new Vector3(0, 1.92f, 0), cm.transform.position - (transform.position + new Vector3(0, 1.92f, 0)), 3.5f))
         {
-            Debug.Log("b");
+            //Debug.Log("b");
             cm.transform.position = transform.position + new Vector3(0, 1.92f, 0);
         }
 

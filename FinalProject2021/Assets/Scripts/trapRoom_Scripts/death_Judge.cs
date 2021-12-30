@@ -28,7 +28,7 @@ public class death_Judge : MonoBehaviour
         {
             wall = true;
         }
-        if ((wall && wallTrap) || trapNum >= 2)
+        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser")
         {
             transform.position = rebirthPoint;
         }
