@@ -9,6 +9,7 @@ public class trap_sinMove : MonoBehaviour
     Vector3 originalPos;
     public float moveDistance;//equals to object length in moveDir / 2
     public float frequency;
+    public float offset;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class trap_sinMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float offest = Mathf.Sin(Time.time * frequency) * moveDistance;
+        float offest = Mathf.Sin(Time.time * frequency + offset) * moveDistance;
         transform.position = originalPos + offest * moveDirection;
     }
 }
