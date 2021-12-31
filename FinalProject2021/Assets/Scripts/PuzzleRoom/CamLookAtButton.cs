@@ -8,7 +8,7 @@ public class CamLookAtButton : MonoBehaviour
     public RotateRoad rr;
     public RotateRoad rr1;
     public GameObject player;
-    public ChangeText changeText;
+    public Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,8 @@ public class CamLookAtButton : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) < 1)
         {
-
-            changeText.Change("Press E to interact with organ.");
+            text.gameObject.SetActive(true);
+            //changeText.Change("Press E to interact with organ.");
             if (Input.GetKeyDown(KeyCode.E))
             {
                 rr.Rotate_road();
@@ -30,7 +30,8 @@ public class CamLookAtButton : MonoBehaviour
             }
         }
         else
-            changeText.Change("");
+            text.gameObject.SetActive(false);
+            //changeText.Change("");
     }
     
 }
