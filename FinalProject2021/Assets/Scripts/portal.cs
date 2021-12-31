@@ -40,13 +40,14 @@ public class portal : MonoBehaviour
                     SceneManager.LoadScene(1);
                 else
                     player.transform.position = teleportPosition;
+            }
+            if (transform.name == "endPortal_stage2")
+            {
                 if (pc.allKeyInStage2)
                     SceneManager.LoadScene(2);
             }
             else
-            {
                 player.transform.position = teleportPosition;
-            }
         }
         teleporting = false;
     }

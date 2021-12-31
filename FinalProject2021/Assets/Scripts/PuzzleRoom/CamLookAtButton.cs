@@ -1,31 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CamLookAtButton : MonoBehaviour
 {
     public RotateRoad rr;
     public RotateRoad rr1;
     public GameObject player;
+    public ChangeText changeText;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player.transform.position.x - transform.position.x < 1 && player.transform.position.x - transform.position.x > -1 && player.transform.position.z - transform.position.z > -1 && player.transform.position.z - transform.position.z < 1 && player.transform.position.y - transform.position.y > -1 && player.transform.position.y - transform.position.y < 1)
+        if (Vector3.Distance(transform.position, player.transform.position) < 1)
         {
-            Debug.Log("r");
+
+            changeText.Change("Press E to interact with organ.");
             if (Input.GetKeyDown(KeyCode.E))
             {
                 rr.Rotate_road();
                 rr1.Rotate_road();
             }
         }
+        else
+            changeText.Change("");
     }
     
 }

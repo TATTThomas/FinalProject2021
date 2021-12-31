@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class getKey : MonoBehaviour
 {
 
     public GameObject player;
     public PlayerController pc;
+    public Text text;
     Vector3 playerPos;
     int sceneNum;
 
@@ -23,6 +25,7 @@ public class getKey : MonoBehaviour
         playerPos = player.transform.position + new Vector3(0, 1.85f, 0);
         if (Vector3.Distance(playerPos, transform.position) < 1)
         {
+            text.gameObject.SetActive(true);
             if (Input.GetKey(KeyCode.E))
             {
                 if (sceneNum == 0)
@@ -32,6 +35,8 @@ public class getKey : MonoBehaviour
                 Destroy(transform.gameObject);
             }
         }
+        else
+            text.gameObject.SetActive(false);
         if (pc.keyInStage1 == 2)
             pc.allKeyInStage1 = true;
         if (pc.keyInStage2 == 3)
