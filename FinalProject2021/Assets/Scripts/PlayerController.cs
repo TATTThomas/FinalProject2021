@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     Vector3 moving;
     public int keyInStage1, keyInStage2;
     public bool allKeyInStage1, allKeyInStage2;
+    public bool trapRoom;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
         keyInStage2 = 0;
         allKeyInStage1 = false;
         allKeyInStage2 = false;
+        trapRoom = false;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }

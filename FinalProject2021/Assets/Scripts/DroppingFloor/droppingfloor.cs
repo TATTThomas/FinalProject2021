@@ -9,29 +9,42 @@ public class droppingfloor : MonoBehaviour
     {
         if (collision.transform.name == "Player")
         {
-            r = Random.value;
             if (r > 0.75)
             {
-                Debug.Log(r);
-                StartCoroutine(rotate());
+                StartCoroutine(RotateMe(new Vector3(90, 0, 0), 1f));
+                StartCoroutine(rotateBack());
             }
         }
     }
-    IEnumerator rotate()
+    
+
+    IEnumerator rotateBack()
     {
-        while (transform.eulerAngles.y != 90)
-        {
-            transform.parent.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime);
-            yield return null;
-        }
+        Debug.Log("1");
+        yield return new WaitForSecondsRealtime(3);
+        StartCoroutine(RotateMe(new Vector3(-90, 0, 0), 1f));
     }
     // Start is called before the first frame update
     void Start()
     {
+        r = Random.value;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+    IEnumerator RotateMe(Vector3 byAngles, float inTime)
+    {
+        var fromAngle = transform.parent.rotation;
+        var toAngle = Quaternion.Euler(transform.parent.eulerAngles + byAngles);
+        for (var t = 0f; t < 1; t += Time.deltaTime / inTime)
+        {
+            transform.parent.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
+            yield return null;
+        }
+        transform.parent.rotation = toAngle;
+        Debug.Log("r");
     }
 }

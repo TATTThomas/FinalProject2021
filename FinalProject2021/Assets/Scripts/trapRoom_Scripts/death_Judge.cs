@@ -4,34 +4,15 @@ using UnityEngine;
 
 public class death_Judge : MonoBehaviour
 {
-    bool wall, wallTrap, floor, ceilingTrap;
+    public bool wall, wallTrap, floor, ceilingTrap;
     int trapNum;
-    public Vector3 rebirthPoint;
+    public Vector3 rebirthPoint, trapRebirthPoint;
+    public PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
         trapNum = 0;
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.name == "ceilingTrap")
-        {
-            ceilingTrap = true;
-        }
-        if (collision.transform.name == "wallTrap")
-        {
-            wallTrap = true;
-            trapNum++;
-        }
-        if (collision.transform.name == "specificWall")
-        {
-            wall = true;
-        }
-        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser" || (ceilingTrap && floor))
-        {
-            transform.position = rebirthPoint;
-        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -44,15 +25,50 @@ public class death_Judge : MonoBehaviour
         {
             wall = false;
         }
-        if (collision.transform.name == "floor")
+        if (transform.position.y > 0.1f)
         {
             floor = false;
         }
-        if (collision.transform.name == "ceilingTrap")
+        if (collision.transform.name == "ceilingTrapCube")
         {
             ceilingTrap = false;
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name == "ceilingTrapCube" && transform.position.x - collision.transform.position.x < 1.2 && transform.position.x - collision.transform.position.x > -1.2 && transform.position.z - collision.transform.position.z < 1.2 && transform.position.z - collision.transform.position.z > -1.2)
+        {
+            ceilingTrap = true;
+        }
+        if (collision.transform.name == "wallTrap")
+        {
+            wallTrap = true;
+            trapNum++;
+        }
+        if (collision.transform.name == "specificWall")
+        {
+            wall = true;
+        }
+        if (collision.transform.name == "floor")
+        {
+            floor = true;
+        }
+        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser" || (ceilingTrap && floor))
+        {
+            if (pc.trapRoom)
+            {
+                transform.position = trapRebirthPoint;
+            }
+            else
+            {
+                transform.position = rebirthPoint;
+            }
+        }
+    }
+
+    
+
+    
 
     // Update is called once per frame
     void Update()
