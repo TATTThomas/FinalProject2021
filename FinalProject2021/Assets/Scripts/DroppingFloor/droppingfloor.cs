@@ -5,14 +5,19 @@ using UnityEngine;
 public class droppingfloor : MonoBehaviour
 {
     float r;
+    bool rotating = false;
     void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.name == "Player")
         {
             if (r > 0.5)
             {
-                StartCoroutine(RotateMe(new Vector3(90, 0, 0), 1f));
-                StartCoroutine(rotateBack());
+                if (!rotating)
+                {
+                    rotating = true;
+                    StartCoroutine(RotateMe(new Vector3(90, 0, 0), 1f));
+                    StartCoroutine(rotateBack());
+                }
             }
         }
     }
@@ -23,6 +28,8 @@ public class droppingfloor : MonoBehaviour
         Debug.Log("1");
         yield return new WaitForSecondsRealtime(3);
         StartCoroutine(RotateMe(new Vector3(-90, 0, 0), 1f));
+
+        rotating = false;
     }
     // Start is called before the first frame update
     void Start()

@@ -32,11 +32,14 @@ public class getKey : MonoBehaviour
             {
                 if (sceneNum == 1)
                 {
-                    dj.trapRebirthPoint = new Vector3(0, 0.01f, 150);
+                    if (pc.trapRoom)
+                    {
+                        dj.trapRebirthPoint = new Vector3(0, 0.01f, 150);
+                        cube1.offset = 1.1f;
+                        cube2.offset = 2.2f;
+                    }
                     pc.keyInStage1++;
                     text.gameObject.SetActive(false);
-                    cube1.offset = 1.1f;
-                    cube2.offset = 2.2f;
                 }
                 if (sceneNum == 2)
                 {

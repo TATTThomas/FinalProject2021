@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
         moving = Vector3.zero;
 
-        /*if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             if(scene.name == "SampleScene" || scene.name == "Stage_2")
             {
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
                 Cursor.visible = true;
                 SceneManager.LoadScene(0);
             }
-        }*/
+        }
 
         resetAnimation();
         idle = true;
