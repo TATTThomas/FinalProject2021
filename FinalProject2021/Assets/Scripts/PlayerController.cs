@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed, jumpForce;
-    bool runforward, runback, runright, runleft, idle, runfr, runfl, runbr, runbl, jump;
+    bool runforward, runback, runright, runleft, idle, runfr, runfl, runbr, runbl, jump; 
+    public bool dead;
     Animator animator;
     public CameraController cameraCont;
     public Vector3 movingDir;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public int keyInStage1, keyInStage2;
     public bool allKeyInStage1, allKeyInStage2;
     public bool trapRoom;
+    Scene scene;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
         trapRoom = false;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        scene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
@@ -44,6 +48,15 @@ public class PlayerController : MonoBehaviour
         faceDir = cameraCont.faceDir;
 
         moving = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            if(scene.name == "SampleScene" || scene.name == "Stage_2")
+            {
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene(0);
+            }
+        }
 
         resetAnimation();
         idle = true;
@@ -176,6 +189,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("RunFL", runfl);
         animator.SetBool("Idel", idle);
         animator.SetBool("Jump", jump);
+        animator.SetBool("Dead", dead);
     }
 
     void resetAnimation()

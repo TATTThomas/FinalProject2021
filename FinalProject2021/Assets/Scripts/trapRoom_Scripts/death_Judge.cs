@@ -5,6 +5,8 @@ using UnityEngine;
 public class death_Judge : MonoBehaviour
 {
     public bool wall, wallTrap, floor, ceilingTrap;
+    bool startTimer;
+    int counter;
     int trapNum;
     public Vector3 rebirthPoint, trapRebirthPoint;
     public PlayerController pc;
@@ -12,6 +14,8 @@ public class death_Judge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        counter = 0;
+        startTimer = true;
         trapNum = 0;
     }
     private void OnCollisionExit(Collision collision)
@@ -55,20 +59,27 @@ public class death_Judge : MonoBehaviour
         }
         if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser" || (ceilingTrap && floor) || collision.transform.name == "dead")
         {
-            if (pc.trapRoom)
-            {
-                transform.position = trapRebirthPoint;
-            }
-            else
-            {
-                transform.position = rebirthPoint;
-            }
+            StartCoroutine(timer());
         }
     }
 
-    
 
-    
+    IEnumerator timer()
+    {
+        pc.dead = true;
+        yield return new WaitForSeconds(2);
+        pc.dead = false;
+        if (pc.trapRoom)
+        {
+            transform.position = trapRebirthPoint;
+        }
+        else
+        {
+            transform.position = rebirthPoint;
+        }
+
+    }
+
 
     // Update is called once per frame
     void Update()

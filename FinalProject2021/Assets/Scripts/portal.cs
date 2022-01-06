@@ -46,14 +46,17 @@ public class portal : MonoBehaviour
         if (transform.name == "endPortal")
         {
             if (pc.allKeyInStage1)
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(2);
             else
                 player.transform.position = teleportPosition;
         }
         if (transform.name == "endPortal_stage2")
         {
             if (pc.allKeyInStage2)
-                SceneManager.LoadScene(2);
+            {
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene(3);
+            }
         }
         else
             player.transform.position = teleportPosition;
