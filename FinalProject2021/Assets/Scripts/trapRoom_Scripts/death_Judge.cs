@@ -67,7 +67,10 @@ public class death_Judge : MonoBehaviour
     IEnumerator timer()
     {
         pc.dead = true;
+        pc.rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return new WaitForSeconds(2);
+        pc.rb.constraints = RigidbodyConstraints.None;
+        pc.rb.constraints = RigidbodyConstraints.FreezeRotation;
         pc.dead = false;
         if (pc.trapRoom)
         {

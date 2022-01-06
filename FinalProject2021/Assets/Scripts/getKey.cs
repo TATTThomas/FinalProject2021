@@ -30,7 +30,7 @@ public class getKey : MonoBehaviour
             text.gameObject.SetActive(true);
             if (Input.GetKey(KeyCode.E))
             {
-                if (sceneNum == 0)
+                if (sceneNum == 1)
                 {
                     dj.trapRebirthPoint = new Vector3(0, 0.01f, 150);
                     pc.keyInStage1++;
@@ -38,7 +38,7 @@ public class getKey : MonoBehaviour
                     cube1.offset = 1.1f;
                     cube2.offset = 2.2f;
                 }
-                if (sceneNum == 1)
+                if (sceneNum == 2)
                 {
                     pc.keyInStage2++;
                     text.gameObject.SetActive(false);

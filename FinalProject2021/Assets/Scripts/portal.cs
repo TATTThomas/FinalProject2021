@@ -55,6 +55,7 @@ public class portal : MonoBehaviour
             if (pc.allKeyInStage2)
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(3);
             }
         }

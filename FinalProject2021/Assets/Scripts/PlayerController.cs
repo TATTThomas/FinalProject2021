@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 movingDir;
     public Quaternion faceDir;
     public GameObject cm;
-    Rigidbody rb;
+    public Rigidbody rb;
     Vector3 five = new Vector3(0, 0, -3);
     Vector3 moving;
     public int keyInStage1, keyInStage2;
@@ -49,14 +49,15 @@ public class PlayerController : MonoBehaviour
 
         moving = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.Escape))
+        /*if (Input.GetKey(KeyCode.Escape))
         {
             if(scene.name == "SampleScene" || scene.name == "Stage_2")
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(0);
             }
-        }
+        }*/
 
         resetAnimation();
         idle = true;
