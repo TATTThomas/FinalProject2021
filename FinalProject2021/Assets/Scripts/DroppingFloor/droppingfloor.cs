@@ -9,7 +9,7 @@ public class droppingfloor : MonoBehaviour
     {
         if (collision.transform.name == "Player")
         {
-            if (r > 0.75)
+            if (r > 0.5)
             {
                 StartCoroutine(RotateMe(new Vector3(90, 0, 0), 1f));
                 StartCoroutine(rotateBack());

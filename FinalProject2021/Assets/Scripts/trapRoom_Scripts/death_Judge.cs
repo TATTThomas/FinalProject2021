@@ -53,7 +53,7 @@ public class death_Judge : MonoBehaviour
         {
             floor = true;
         }
-        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser" || (ceilingTrap && floor))
+        if ((wall && wallTrap) || trapNum >= 2 || collision.transform.name == "laser" || (ceilingTrap && floor) || collision.transform.name == "dead")
         {
             if (pc.trapRoom)
             {
