@@ -617,7 +617,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 0.9
+    m_LineSpacing: 0.8
   m_Text: 'W : Move Forward
 
 
@@ -638,7 +638,10 @@ MonoBehaviour:
 
 
     Mouse : Perspective
-    Rotation'
+    Rotation
+
+
+    Esc : Back to Menu'
 --- !u!222 &816772197
 CanvasRenderer:
   m_ObjectHideFlags: 0
